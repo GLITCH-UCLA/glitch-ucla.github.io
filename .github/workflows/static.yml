@@ -51,6 +51,7 @@ jobs:
         run: |
           # Create a temporary settings file for collectstatic
           cat > temp_settings.py << EOL
+          import os
           from glitchweb.settings import *
           DEBUG = False
           STATIC_ROOT = os.path.join(BASE_DIR, '_site/static')
