@@ -1,0 +1,69 @@
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Create static build directory
+        run: mkdir -p _site
+      - name: Copy static content to build directory
+        run: |
+          # Copy the HTML templates to the site root
+          cp -r glitchwebapp/templates/* _site/
+          # Copy static assets
+          mkdir -p _site/static
+          cp -r glitchwebapp/static/* _site/static/ || echo "No static files to copy"
+          # Create index.html in the root if it doesn't exist
+          if [ ! -f _site/index.html ]; then
+            # If index.html doesn't exist in templates, use the base index.html
+            if [ -f _site/base.html ]; then
+              cp _site/base.html _site/index.html
+            else
+              echo "<meta http-equiv='refresh' content='0; url=index.html'>" > _site/index.html
+            fi
+          fi
+          # Replace Django template tags with static content
+          find _site -type f -name "*.html" -exec sed -i 's/{% extends.*%}//g' {} \;
+          find _site -type f -name "*.html" -exec sed -i 's/{% load.*%}//g' {} \;
+          find _site -type f -name "*.html" -exec sed -i 's/{% block.*%}//g' {} \;
+          find _site -type f -name "*.html" -exec sed -i 's/{% endblock.*%}//g' {} \;
+          find _site -type f -name "*.html" -exec sed -i 's/{% static \(.*\) %}/static\/\1/g' {} \;
+          find _site -type f -name "*.html" -exec sed -i 's/{% url \(.*\) %}/\1.html/g' {} \;
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
