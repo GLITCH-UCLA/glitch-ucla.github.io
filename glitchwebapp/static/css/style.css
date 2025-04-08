@@ -1,0 +1,479 @@
+/* index.html */
+@import url('https://fonts.googleapis.com/css?family=JetBrains Mono');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: "JetBrains Mono";
+    line-height: 1.5;
+    scroll-behavior: smooth;
+}
+
+/* Container (Hero Section) */
+.container {
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: 80px; /* Added to account for fixed header */
+}
+
+header {
+    width: 100%;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header nav a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+header nav a.active {
+    background-color: #444;
+    color: #fff;
+}
+
+main h1 {
+    font-size: 70px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+main h2 {
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+main p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+main button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 14px;
+    font-family: "JetBrains Mono";
+    cursor: pointer;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+main button:hover {
+    background-color: #666;
+}
+
+/* Who We Are Section */
+.who-we-are {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 150px;
+    background-color: rgba(17, 17, 17, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.who-we-are h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.who-we-are h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #444;
+}
+
+.who-we-are-content {
+    margin-top: 20px;
+}
+
+.description-card {
+    background-color: rgba(34, 34, 34, 0.6);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.description-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.description-card p {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.who-we-are h3 {
+    font-size: 28px;
+    margin: 30px 0;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+    color: #ccc;
+}
+
+.achievements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.achievement {
+    background-color: rgba(34, 34, 34, 0.6);
+    padding: 25px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement:hover {
+    transform: translateY(-7px);
+    background-color: rgba(51, 51, 51, 0.8);
+}
+
+.achievement-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.achievement-icon img {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+.achievement h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.achievement p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+    color: #ccc;
+}
+
+/* What We Do Section */
+.what-we-do {
+    padding: 70px 20px;
+    text-align: center;
+    background-color: #000;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.what-we-do h2 {
+    font-size: 50px;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.activities-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.activity-column {
+    flex: 1;
+    min-width: 250px;
+    max-width: 320px;
+    background-color: #000;
+    border: 3px solid #b300ff;
+    border-radius: 15px;
+    padding: 30px 15px;
+    text-align: center;
+    color: #fff;
+    font-family: "JetBrains Mono", monospace;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-column:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(179, 0, 255, 0.4);
+}
+
+.activity-column h3 {
+    font-size: 22px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: none;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.activity-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.activity-column li {
+    font-size: 16px;
+    padding: 12px 5px;
+    border-top: 1px solid rgba(179, 0, 255, 0.3);
+    line-height: 1.5;
+    color: #fff;
+}
+
+.activity-column li:first-child {
+    border-top: none;
+}
+
+.social-media {
+    text-align: center;
+    margin-top: 300px;
+}
+
+.social-media p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+#social-media-logos {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#social-media-logos button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#social-media-logos img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+#social-media-logos img:hover {
+    transform: scale(1.1);
+}
+
+/*********************************************************/
+
+/* projects.html */
+
+.projects-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+.projects-list li {
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: #222;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.projects-list li:hover {
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+/*********************************************************/
+
+/* join.html */
+
+/* Why Join Us Section */
+
+.why-join-us {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.why-join-us h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+}
+
+.why-join-us p {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/*********************************************************/
+
+/* about.html */
+
+.our-mission {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.our-mission h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+}
+
+.our-mission p {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/*********************************************************/
+
+/* internship.html */
+
+.internship-container {
+    position: relative;
+    padding-top: 60px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.internship-container header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+}
+
+.internship-section {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+    clear: both;
+}
+
+.internship-section h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.internship-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.internship-section a {
+    display: inline-block;
+    background-color: #444;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.internship-section a:hover {
+    background-color: #666;
+}
+
+.qr-code-section {
+    text-align: center;
+    margin: 30px auto;
+    display: block;
+    width: 100%;
+}
+
+.internship-qr {
+    max-width: 120px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}

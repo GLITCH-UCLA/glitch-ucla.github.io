@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Glitch UCLA{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <!-- Global Navigation -->
+        <header>
+            <nav>
+                <a href="{% url 'index' %}">home</a>
+                <a href="{% url 'projects' %}">projects</a>
+                <a href="{% url 'internship' %}">internship</a>
+                <a href="{% url 'join' %}">join</a>
+                <a href="{% url 'about' %}">about us</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block extra_js %}{% endblock %}
+    
+    <script>
+        // Add active class to the current navigation link
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current path
+            const currentPath = window.location.pathname;
+            
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('header nav a');
+            
+            // Loop through each link and check if its href matches the current path
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href');
+                
+                // Check if current path ends with the link path or if both are root paths
+                if ((currentPath.endsWith(linkPath) && linkPath !== '/') || 
+                    (currentPath === '/' && linkPath === '/')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

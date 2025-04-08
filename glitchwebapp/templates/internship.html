@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}GLITCH - Internship{% endblock %}
+
+{% block extra_head %}
+<style>
+    .internship-header {
+        text-align: center;
+        padding: 30px 20px 50px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .internship-header h1 {
+        font-size: 52px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-shadow: 0 0 15px rgba(179, 0, 255, 0.4);
+        letter-spacing: 1px;
+    }
+
+    .internship-header p {
+        font-size: 20px;
+        max-width: 800px;
+        margin: 0 auto 15px;
+        line-height: 1.6;
+        color: #ddd;
+    }
+
+    .internship-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .internship-details {
+        background-color: rgba(17, 17, 17, 0.7);
+        border-radius: 15px;
+        padding: 40px 30px;
+        margin: 30px auto 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .program-info {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .program-info h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #fff;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+
+    .program-info h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #b300ff;
+    }
+
+    .program-info p {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+        color: #eee;
+    }
+
+    .program-info ul {
+        margin-bottom: 30px;
+        padding-left: 20px;
+    }
+
+    .program-info li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 15px;
+        line-height: 1.5;
+        color: #ddd;
+    }
+
+    .program-info li:before {
+        content: '•';
+        color: #ffffff;
+        position: absolute;
+        left: -5px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    .qr-section {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .qr-code {
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        max-width: 200px;
+        transition: transform 0.3s ease;
+    }
+
+    .qr-code:hover {
+        transform: scale(1.05);
+    }
+
+    .qr-code img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .apply-button {
+        display: inline-block;
+        background-color: #b300ff;
+        color: white;
+        font-family: "JetBrains Mono";
+        font-size: 18px;
+        padding: 15px 35px;
+        border-radius: 30px;
+        text-decoration: none;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+        border: none;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(179, 0, 255, 0.4);
+    }
+
+    .apply-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(179, 0, 255, 0.6);
+        background-color: #c72aff;
+    }
+
+    .perks-section {
+        margin: 50px auto;
+        text-align: center;
+    }
+
+    .perks-section h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+        text-transform: lowercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+
+    .perks-section h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #b300ff;
+    }
+
+    .perks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .perk-card {
+        background-color: rgba(34, 34, 34, 0.6);
+        border-radius: 10px;
+        padding: 25px 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .perk-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background-color: rgba(51, 51, 51, 0.7);
+    }
+
+    .perk-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: #b300ff;
+    }
+
+    .perk-card h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #fff;
+    }
+
+    .perk-card p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #ddd;
+    }
+
+    .social-media {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .internship-details {
+            flex-direction: column;
+        }
+
+        .qr-section {
+            margin-top: 20px;
+            order: -1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="internship-container">
+    <section class="internship-header">
+        <h1>High School Internship Program</h1>
+        <p>Join GLITCH UCLA as a high school intern and gain real-world experience working on exciting tech projects!
+        </p>
+    </section>
+
+    <section class="internship-details">
+        <div class="program-info">
+            <h2>Program Details</h2>
+            <p>GLITCH @UCLA is currently looking for talented high school students interested in technology to join our
+                internship program. As an intern, you'll get to work on real projects alongside UCLA students!</p>
+
+            <ul>
+                <p>- Learn practical coding and design skills</p>
+                <p>- Collaborate on real-world projects</p>
+                <p>- Get mentorship from UCLA computer science students</p>
+                <p>- Add valuable experience to your college applications</p>
+                <p>- Participate virtually (open to high school students nationwide)</p>
+            </ul>
+
+            <p><strong>Application deadline:</strong> Rolling admissions</p>
+            <p><strong>Program duration:</strong> Flexible, based on project needs</p>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUBZ0HR-lBSXcW3J8dfi3kj9QcnP9gpQ6-ASL27N1NhRVrQw/viewform?usp=dialog"
+                target="_blank" class="apply-button">Apply Now</a>
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-code">
+                <img src="{% static 'logos/internQR.jpg' %}" alt="Internship QR Code">
+            </div>
+            <p>Scan to apply</p>
+        </div>
+    </section>
+
+    <section class="perks-section">
+        <h2>why join our program</h2>
+
+        <div class="perks-grid">
+            <div class="perk-card">
+                <div class="perk-icon">💻</div>
+                <h3>Hands-on Experience</h3>
+                <p>Work on real projects that make an impact, not just theoretical exercises.</p>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-icon">🎓</div>
+                <h3>College Prep</h3>
+                <p>Strengthen your college applications with meaningful tech experience.</p>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-icon">🤝</div>
+                <h3>Mentorship</h3>
+                <p>Learn directly from UCLA computer science and engineering students.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-media">
+        <p>find us on:</p>
+        <div id="social-media-logos">
+            <a href="https://www.instagram.com/glitch.ucla/" target="_blank"><button><img
+                        src="{% static 'logos/instagram.png' %}" alt="Instagram"></button></a>
+            <a href="https://www.linkedin.com/in/jon-ouyang/" target="_blank"><button><img
+                        src="{% static 'logos/linkedin.png' %}" alt="LinkedIn"></button></a>
+            <a href="https://github.com/GLITCH-UCLA" target="_blank"><button><img src="{% static 'logos/github.png' %}"
+                        alt="GitHub"></button></a>
+        </div>
+    </section>
+</div>
+{% endblock %}

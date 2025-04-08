@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}join us{% endblock %}
+
+{% block extra_head %}
+<style>
+    .join-header {
+        text-align: center;
+        padding: 60px 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .join-header h1 {
+        font-size: 60px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-shadow: 0 0 15px rgba(179, 0, 255, 0.4);
+    }
+
+    .join-header p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto 40px auto;
+        line-height: 1.6;
+    }
+
+    .signup-button {
+        display: inline-block;
+        background-color: #b300ff;
+        color: white;
+        font-family: "JetBrains Mono";
+        font-size: 18px;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(179, 0, 255, 0.4);
+        animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+        0% {
+            box-shadow: 0 0 10px rgba(179, 0, 255, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 0 20px rgba(179, 0, 255, 0.7);
+        }
+
+        100% {
+            box-shadow: 0 0 10px rgba(179, 0, 255, 0.4);
+        }
+    }
+
+    .signup-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(179, 0, 255, 0.6);
+    }
+
+    .signup-button:active {
+        transform: translateY(-2px);
+    }
+
+    .benefits-section {
+        background-color: rgba(17, 17, 17, 0.7);
+        border-radius: 15px;
+        padding: 50px 30px;
+        max-width: 1000px;
+        margin: 50px auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .benefits-section h2 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-bottom: 15px;
+    }
+
+    .benefits-section h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, transparent, #b300ff, transparent);
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .benefit-card {
+        background-color: rgba(34, 34, 34, 0.6);
+        border-radius: 10px;
+        padding: 25px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .benefit-card .icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 20px auto;
+        background-color: rgba(179, 0, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    .benefit-card h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .benefit-card p {
+        font-size: 16px;
+        color: #ddd;
+        line-height: 1.6;
+    }
+
+    .faq-section {
+        max-width: 900px;
+        margin: 70px auto;
+        padding: 0 20px;
+    }
+
+    .faq-section h2 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .faq-item {
+        background-color: rgba(34, 34, 34, 0.6);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 20px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        position: relative;
+        border-left: 4px solid #b300ff;
+    }
+
+    .faq-question:after {
+        content: '+';
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        color: #b300ff;
+    }
+
+    .faq-answer {
+        padding: 0 30px 20px 30px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ddd;
+    }
+
+    .social-media {
+        margin-top: 100px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="join-container">
+    <!-- Header Section -->
+    <section class="join-header">
+        <h1>join GLITCH</h1>
+        <p>Take the next step in your tech journey by becoming part of UCLA's premier hackathon community. We welcome
+            coders, designers, and creators of all experience levels.</p>
+        <a href="https://discord.gg/2MGnDCxS" target="_blank" class="signup-button">Join Our Discord</a>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <h2>why join us</h2>
+        <p>GLITCH is a club for developers by developers. We focus on building, learning, and competing together in a
+            supportive community environment.</p>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="icon">💻</div>
+                <h3>Build Projects</h3>
+                <p>Work on exciting side projects with like-minded peers and turn your ideas into reality.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🏆</div>
+                <h3>Compete in Hackathons</h3>
+                <p>Join our teams in hackathons and competitions to showcase your skills and win prizes.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="icon">🚀</div>
+                <h3>Grow Your Skills</h3>
+                <p>Learn from experienced members and develop both technical and soft skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>frequently asked questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Do I need previous experience to join?</div>
+            <div class="faq-answer">Not at all! GLITCH welcomes members of all skill levels. Whether you're just
+                starting your coding journey or you're an experienced developer, there's a place for you in our
+                community.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">How do I get involved after joining?</div>
+            <div class="faq-answer">After joining our Discord, introduce yourself and check out our project channels. We
+                have regular meetings and project groups you can join based on your interests.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Are there any membership fees?</div>
+            <div class="faq-answer">No, membership is completely free! We believe in making tech accessible to everyone.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">How much time commitment is expected?</div>
+            <div class="faq-answer">GLITCH is flexible! You can participate as much or as little as your schedule
+                allows. Some members join specific project teams with regular meetings, while others drop in for
+                occasional events.</div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-media">
+        <p>find us on:</p>
+        <div id="social-media-logos">
+            <a href="https://www.instagram.com/glitch.ucla/" target="_blank"><button><img
+                        src="{% static 'logos/instagram.png' %}" alt="Instagram"></button></a>
+            <a href="https://www.linkedin.com/in/jon-ouyang/" target="_blank"><button><img
+                        src="{% static 'logos/linkedin.png' %}" alt="LinkedIn"></button></a>
+            <a href="https://github.com/GLITCH-UCLA" target="_blank"><button><img src="{% static 'logos/github.png' %}"
+                        alt="GitHub"></button></a>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Simple FAQ toggle functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const questions = document.querySelectorAll('.faq-question');
+
+        questions.forEach(question => {
+            question.addEventListener('click', function () {
+                const answer = this.nextElementSibling;
+
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    this.style.borderBottomLeftRadius = '5px';
+                    this.style.borderBottomRightRadius = '5px';
+                    this.style.borderBottom = 'none';
+                    this.setAttribute('aria-expanded', 'false');
+                } else {
+                    answer.style.display = 'block';
+                    this.style.borderBottomLeftRadius = '0';
+                    this.style.borderBottomRightRadius = '0';
+                    this.style.borderBottom = '1px solid #333';
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Initialize FAQs to be closed
+        questions.forEach(question => {
+            const answer = question.nextElementSibling;
+            answer.style.display = 'none';
+            question.setAttribute('aria-expanded', 'false');
+        });
+    });
+</script>
+{% endblock %}

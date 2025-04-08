@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}projects{% endblock %}
+
+{% block extra_head %}
+<style>
+    .projects-header {
+        text-align: center;
+        padding: 30px 20px 50px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .projects-header h1 {
+        font-size: 52px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-shadow: 0 0 15px rgba(179, 0, 255, 0.4);
+        letter-spacing: 1px;
+    }
+
+    .projects-header p {
+        font-size: 20px;
+        max-width: 800px;
+        margin: 0 auto 15px;
+        line-height: 1.6;
+        color: #ddd;
+    }
+
+    .projects-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .projects-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        list-style: none;
+        padding: 0;
+        margin: 20px auto 50px;
+    }
+
+    .projects-list li {
+        background-color: rgba(34, 34, 34, 0.6);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid #b300ff;
+        height: 100%;
+    }
+
+    .projects-list li:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        background-color: rgba(51, 51, 51, 0.7);
+    }
+
+    .project-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+        position: relative;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+
+    .project-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #b300ff;
+    }
+
+    .project-description {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ddd;
+        margin-bottom: 20px;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .project-tag {
+        background-color: rgba(179, 0, 255, 0.3);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    /* Modal styles */
+    .modal {
+        visibility: hidden;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.7);
+        width: 90%;
+        max-width: 600px;
+        background-color: rgba(34, 34, 34, 0.95);
+        border: 2px solid #b300ff;
+        box-shadow: 0 10px 30px rgba(179, 0, 255, 0.3);
+        z-index: 1000;
+        padding: 30px;
+        border-radius: 15px;
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .modal.active {
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .modal-overlay {
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .modal-overlay.active {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-header {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #fff;
+        font-weight: bold;
+        border-bottom: 2px solid #b300ff;
+        padding-bottom: 10px;
+    }
+
+    .modal-body {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #eee;
+    }
+
+    .close-btn {
+        background-color: #b300ff;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        cursor: pointer;
+        float: right;
+        border-radius: 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .close-btn:hover {
+        background-color: #d030ff;
+    }
+
+    .social-media {
+        margin-top: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .projects-list {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="projects-container">
+    <!-- Header Section -->
+    <section class="projects-header">
+        <h1>our projects</h1>
+    </section>
+
+    <!-- Projects Section -->
+    <ul class="projects-list">
+        <li
+            onclick="openModal('Hot Potato', 'A mobile game similar to the classic Hot Potato game. Every day, a random user is selected as the hot potato. They must track down and transfer the hot potato to somebody else. The person carrying the potato at the end of the day will get out. This game should be played on a phone with location turned on for each user. The app should be able to tell if another player is near, and will tag someone if they are within 5 meters of another player.')">
+            <div class="project-title">Hot Potato</div>
+            <div class="project-description">
+                A mobile game where users pass a virtual "hot potato" using location tracking.
+            </div>
+            <div class="project-tags">
+                <span class="project-tag">Mobile App</span>
+                <span class="project-tag">Geolocation</span>
+                <span class="project-tag">Social Gaming</span>
+            </div>
+        </li>
+
+        <li
+            onclick="openModal('Project Montgomery 2.0', 'Project Montgomery was a hackathon project to help math learners better visualize equations. We aim to upgrade and deploy Project Montgomery to improve its speed in generating prompts and integrating it with Learning Management Systems like Canvas. Further, we can explore different API options such as Groq. We also want to explore options of having users upload their own videos and images for Montgomery to visualize.')">
+            <div class="project-title">Project Montgomery 2.0</div>
+            <div class="project-description">
+                An AI-powered tool that helps math learners better visualize complex equations and mathematical
+                concepts.
+            </div>
+            <div class="project-tags">
+                <span class="project-tag">Education</span>
+                <span class="project-tag">AI</span>
+                <span class="project-tag">Visualization</span>
+            </div>
+        </li>
+
+        <li
+            onclick="openModal('AI News Tracker', 'A service that will notify you when news you\'re interested in becomes available. For example, if you\'re waiting for Google STEP internship applications to open or for Taylor Swift concert tickets to go on sale, our AI will monitor relevant sources and send you immediate notifications when these events occur.')">
+            <div class="project-title">AI News Tracker</div>
+            <div class="project-description">
+                An intelligent notification service that alerts you when specific news or opportunities you care about
+                become available.
+            </div>
+            <div class="project-tags">
+                <span class="project-tag">AI</span>
+                <span class="project-tag">Notifications</span>
+                <span class="project-tag">Web App</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<section class="social-media">
+    <p>find us on:</p>
+    <div id="social-media-logos">
+        <a href="https://www.instagram.com/glitch.ucla/" target="_blank"><button><img
+                    src="{% static 'logos/instagram.png' %}" alt="Instagram"></button></a>
+        <a href="https://www.linkedin.com/in/jon-ouyang/" target="_blank"><button><img
+                    src="{% static 'logos/linkedin.png' %}" alt="LinkedIn"></button></a>
+        <a href="https://github.com/GLITCH-UCLA" target="_blank"><button><img src="{% static 'logos/github.png' %}"
+                    alt="GitHub"></button></a>
+    </div>
+</section>
+
+<!-- Modal Structure -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+    <button class="close-btn" onclick="closeModal()">Close</button>
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body" id="modal-body"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openModal(title, description) {
+        // Set the modal content
+        document.getElementById('modal-header').textContent = title;
+        document.getElementById('modal-body').textContent = description;
+
+        // Show the modal and overlay
+        const modal = document.getElementById('modal');
+        const overlay = document.getElementById('modal-overlay');
+
+        modal.classList.add('active');
+        overlay.classList.add('active');
+    }
+
+    function closeModal() {
+        // Hide the modal and overlay
+        const modal = document.getElementById('modal');
+        const overlay = document.getElementById('modal-overlay');
+
+        modal.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,395 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}GLITCH{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Styling for the 3D model behind the main section */
+    .main-container {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        pointer-events: none;
+        margin-top: -60px;
+    }
+
+    /* Glitch text effect */
+    .glitch {
+        font-size: 80px;
+        font-weight: bold;
+        position: relative;
+        color: white;
+        animation: glitch-appear 2s forwards;
+        opacity: 0;
+    }
+
+    @keyframes glitch-appear {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        10% {
+            opacity: 1;
+            transform: scale(1.05) skewX(10deg);
+            text-shadow: -3px 0 #ff00cc, 3px 0 #00ccff;
+        }
+
+        15% {
+            transform: scale(1) skewX(-5deg);
+            text-shadow: 5px 0 #ff00cc, -5px 0 #00ccff;
+        }
+
+        20% {
+            transform: skewX(3deg);
+            text-shadow: -2px 0 #ff00cc, 2px 0 #00ccff;
+        }
+
+        25% {
+            transform: skewX(-1deg);
+            text-shadow: 1px 0 #ff00cc, -1px 0 #00ccff;
+        }
+
+        35% {
+            transform: scale(1.02);
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #b300ff, 0 0 20px #b300ff;
+        }
+
+        40% {
+            transform: scale(1);
+            text-shadow: none;
+        }
+
+        45% {
+            transform: scale(1);
+            text-shadow: -3px 0 #ff00cc, 3px 0 #00ccff;
+        }
+
+        50% {
+            text-shadow: none;
+        }
+
+        55% {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #b300ff, 0 0 20px #b300ff;
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    .glitch::before,
+    .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        animation: glitch-layers 4s infinite alternate-reverse;
+    }
+
+    .glitch::before {
+        left: 2px;
+        text-shadow: -1px 0 red;
+        animation-delay: 0.25s;
+    }
+
+    .glitch::after {
+        left: -2px;
+        text-shadow: 1px 0 blue;
+        animation-delay: 0.5s;
+    }
+
+    /* Pulsing button animation */
+    .pulse-button {
+        position: relative;
+        background-color: rgba(179, 0, 255, 0.7);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 15px 30px;
+        font-size: 16px;
+        font-family: "JetBrains Mono";
+        cursor: pointer;
+        text-transform: lowercase;
+        letter-spacing: 1px;
+        overflow: hidden;
+        transition: all 0.3s;
+        box-shadow: 0 0 0 0 rgba(179, 0, 255, 0.7);
+        animation: pulse 2s infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(179, 0, 255, 0.7);
+        }
+
+        70% {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 15px rgba(179, 0, 255, 0);
+        }
+
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(179, 0, 255, 0);
+        }
+    }
+
+    .pulse-button:hover {
+        background-color: rgba(179, 0, 255, 0.9);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .pulse-button:active {
+        transform: translateY(0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-text {
+        display: inline-block;
+    }
+
+    .button-arrow {
+        display: inline-block;
+        font-size: 20px;
+        animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes glitch-layers {
+        0% {
+            opacity: 0;
+            transform: translateX(0);
+        }
+
+        10% {
+            opacity: 0.1;
+            transform: translateX(2px);
+        }
+
+        20% {
+            opacity: 0;
+        }
+
+        30% {
+            opacity: 0.1;
+            transform: translateX(-2px) skewX(5deg);
+        }
+
+        40% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 0.2;
+            transform: translateX(0) skewX(-3deg);
+        }
+
+        60% {
+            opacity: 0;
+        }
+
+        70% {
+            opacity: 0.1;
+            transform: translateX(3px);
+        }
+
+        80% {
+            opacity: 0;
+        }
+
+        90% {
+            opacity: 0.3;
+            transform: translateX(-3px);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateX(0);
+        }
+    }
+
+    /* Then make sure clickable elements inside main can still receive events */
+    main button,
+    main a {
+        pointer-events: auto;
+    }
+
+    .spline-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        /* Place the Spline behind the content */
+        border: none;
+    }
+
+    main {
+        z-index: 1;
+        /* Ensure the text appears above the Spline background */
+        text-align: center;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="main-container">
+    <iframe class="spline-background" src="https://my.spline.design/particles-31e9dd774893aa5be46ecf64a863e767/"
+        frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking"
+        style="pointer-events: auto; width: 100%; height: 100%; border: none;">
+    </iframe>
+
+    <h1 class="glitch" data-text="GLITCH">GLITCH</h1>
+    <p>UCLA's premier hackathon club</p>
+    <button class="pulse-button" onclick="scrollToWhoWeAre()">
+        <span class="button-text">click to get started</span>
+        <span class="button-arrow">↓</span>
+    </button>
+    </main>
+</div>
+
+<!-- Who Are We Section -->
+<section class="who-we-are">
+    <h2>who are we?</h2>
+    <div class="who-we-are-content">
+        <div class="description-card">
+            <p>
+                We are GLITCH at UCLA, UCLA's premier hackathon club. Our club is by developers for developers: we build
+                projects non-stop for people of all levels and experience. Our club aims to build any idea into a
+                product and
+                develop club members to compete and win hackathons.
+            </p>
+        </div>
+
+        <h3>notable accomplishments</h3>
+
+        <div class="achievements-container">
+            <div class="achievement">
+                <div class="achievement-icon">
+                    <img src="{% static 'logos/trophy.png' %}" alt="Trophy"
+                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3176/3176278.png'">
+                </div>
+                <h4>Hackathon debut</h4>
+                <p>Our teams will debut at LAHacks, and will be competing with teams from top universities to win
+                    prizes. We have team matching in our discord if interested.</p>
+            </div>
+
+            <div class="achievement">
+                <div class="achievement-icon">
+                    <img src="{% static 'logos/people.png' %}" alt="Community"
+                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/1256/1256650.png'">
+                </div>
+                <h4>50+ Active Members</h4>
+                <p>We've grown to over 50 active members from diverse backgrounds, making us one of the largest tech
+                    communities at UCLA.</p>
+            </div>
+
+            <div class="achievement">
+                <div class="achievement-icon">
+                    <img src="{% static 'logos/code.png' %}" alt="Code"
+                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/1005/1005141.png'">
+                </div>
+                <h4>5+ Active Projects</h4>
+                <p>We are currently working on 5+ active projects, many of which have been recognized at national
+                    competitions and industry events.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What Do We Do Section -->
+<section class="what-we-do">
+    <h2>GLITCH @ UCLA</h2>
+    <div class="activities-container">
+        <div class="activity-column">
+            <h3>Build Side Projects</h3>
+            <ul>
+                <li>Nonstop Projects</li>
+                <li>Open to ALL Members</li>
+                <li>Free For All,<br>No Project Reqs.</li>
+                <li>No More Consulting</li>
+            </ul>
+        </div>
+
+        <div class="activity-column">
+            <h3>Compete in Hackathons</h3>
+            <ul>
+                <li>Glitch A Team</li>
+                <li>Hackathon Toolkit</li>
+                <li>Mentor Support</li>
+                <li>Team Matching</li>
+                <li>Community Support</li>
+            </ul>
+        </div>
+
+        <div class="activity-column">
+            <h3>Host Hackathons</h3>
+            <ul>
+                <li>More exciting<br>news to come!</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="social-media">
+    <p>find us on:</p>
+    <div id="social-media-logos">
+        <a href="https://www.instagram.com/glitch.ucla/" target="_blank"><button><img
+                    src="{% static 'logos/instagram.png' %}" alt="Instagram"></button></a>
+        <a href="https://www.linkedin.com/in/jon-ouyang/" target="_blank"><button><img
+                    src="{% static 'logos/linkedin.png' %}" alt="LinkedIn"></button></a>
+        <a href="https://github.com/GLITCH-UCLA" target="_blank"><button><img src="{% static 'logos/github.png' %}"
+                    alt="GitHub"></button></a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function scrollToWhoWeAre() {
+        const element = document.querySelector('.who-we-are');
+        if (element) {
+            const position = element.getBoundingClientRect().top + window.scrollY - 200;
+            window.scrollTo({ top: position, behavior: 'smooth' });
+        }
+    }
+</script>
+{% endblock %}

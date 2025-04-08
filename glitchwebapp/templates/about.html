@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}about us{% endblock %}
+
+{% block extra_head %}
+<style>
+    .about-header {
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    .about-header h1 {
+        font-size: 60px;
+        text-transform: lowercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(179, 0, 255, 0.5);
+    }
+
+    .about-header p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .mission-container {
+        max-width: 900px;
+        margin: 0 auto 80px auto;
+        background-color: rgba(17, 17, 17, 0.7);
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .mission-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .mission-item {
+        background-color: rgba(34, 34, 34, 0.6);
+        border-left: 4px solid #b300ff;
+        padding: 25px;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mission-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .mission-item h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .mission-item h3 span {
+        color: #b300ff;
+        margin-right: 15px;
+        font-size: 28px;
+    }
+
+    .mission-item p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ddd;
+    }
+
+    .team-section {
+        max-width: 900px;
+        margin: 80px auto;
+        text-align: center;
+    }
+
+    .team-section h2 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-transform: lowercase;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+
+    .team-section h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: #b300ff;
+    }
+
+    .join-us {
+        margin: 60px auto;
+        text-align: center;
+        max-width: 700px;
+    }
+
+    .cta-button {
+        display: inline-block;
+        background-color: #b300ff;
+        color: white;
+        font-family: "JetBrains Mono";
+        font-size: 18px;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        margin-top: 30px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(179, 0, 255, 0.4);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(179, 0, 255, 0.6);
+    }
+
+    .social-media {
+        margin-top: 100px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <!-- Header Section -->
+    <div class="about-header">
+        <h1>about GLITCH</h1>
+        <p>We're a community of builders, dreamers, and innovators at UCLA dedicated to making technology more
+            accessible and fun for everyone.</p>
+    </div>
+
+    <!-- Our Mission Section -->
+    <section class="mission-container">
+        <h2>our mission</h2>
+
+        <div class="mission-items">
+            <div class="mission-item">
+                <h3><span>01</span> Accessible Hackathons</h3>
+                <p>Make hackathons more accessible to everyone regardless of experience level or background.</p>
+            </div>
+
+            <div class="mission-item">
+                <h3><span>02</span> Open Environment</h3>
+                <p>Foster a more open environment for everyone to work on passion projects with support and
+                    encouragement.</p>
+            </div>
+
+            <div class="mission-item">
+                <h3><span>03</span> No Constraints</h3>
+                <p>Build cool side projects without all the constraints that other organizations typically impose.</p>
+            </div>
+
+            <div class="mission-item">
+                <h3><span>04</span> Uniqueness</h3>
+                <p>Create a club that addresses all of the problems of other UCLA CS clubs by focusing on community and
+                    creativity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2>our team</h2>
+        <p>We're a diverse group of students passionate about technology, design, and innovation.</p>
+        <!-- Team members could be added here in the future -->
+    </section>
+
+    <!-- Join Us Section -->
+    <section class="join-us">
+        <h2>join our community</h2>
+        <p>Interested in building projects, competing in hackathons, or just being part of our community? Join us today!
+        </p>
+        <a href="{% url 'join' %}" class="cta-button">Join GLITCH</a>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-media">
+        <p>find us on:</p>
+        <div id="social-media-logos">
+            <a href="https://www.instagram.com/glitch.ucla/" target="_blank"><button><img
+                        src="{% static 'logos/instagram.png' %}" alt="Instagram"></button></a>
+            <a href="https://www.linkedin.com/in/jon-ouyang/" target="_blank"><button><img
+                        src="{% static 'logos/linkedin.png' %}" alt="LinkedIn"></button></a>
+            <a href="https://github.com/GLITCH-UCLA" target="_blank"><button><img src="{% static 'logos/github.png' %}"
+                        alt="GitHub"></button></a>
+        </div>
+    </section>
+</div>
+{% endblock %}
